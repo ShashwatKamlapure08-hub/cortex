@@ -47,6 +47,5 @@ def test_long_script():
 
 if __name__ == "__main__":
     test_short_script()
-    # Uncomment to test other formats:
-    # test_medium_script()
-    # test_long_script()
+    test_medium_script()   # uncomment this
+    test_long_script()     # uncomment this
