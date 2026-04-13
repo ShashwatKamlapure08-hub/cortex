@@ -7,6 +7,25 @@ sys.path.append(".")
 
 from src.engine.script_engine import generate_script
 from rich import print as rprint
+from src.formatters.long_formatter import (
+    format_long,
+    production_script_to_dict as long_to_dict
+)
+
+def test_long_formatter():
+    print("\n" + "="*50)
+    print("TEST 6 — Long Formatter")
+    print("="*50)
+
+    raw = generate_script(
+        topic="The psychology of human motivation",
+        format="long",
+        tone="storytelling"
+    )
+
+    production = format_long(raw)
+    result = long_to_dict(production)
+    rprint(result)
 from src.formatters.medium_formatter import (
     format_medium,
     production_script_to_dict as medium_to_dict
@@ -88,3 +107,4 @@ if __name__ == "__main__":
     test_long_script()
     test_short_formatter()  
     test_medium_formatter()
+    test_long_formatter()
