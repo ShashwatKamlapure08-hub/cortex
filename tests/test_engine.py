@@ -45,7 +45,27 @@ def test_long_script():
     rprint(result)
 
 
+from src.formatters.short_formatter import format_short, production_script_to_dict
+
+def test_short_formatter():
+    print("\n" + "="*50)
+    print("TEST 4 — Short Formatter")
+    print("="*50)
+
+    # Step 1 — Generate raw script
+    raw = generate_script(
+        topic="How to wake up early",
+        format="short",
+        tone="motivational"
+    )
+
+    # Step 2 — Format it
+    production = format_short(raw)
+    result = production_script_to_dict(production)
+    rprint(result)
+
 if __name__ == "__main__":
     test_short_script()
-    test_medium_script()   # uncomment this
-    test_long_script()     # uncomment this
+    test_medium_script()
+    test_long_script()
+    test_short_formatter()  
