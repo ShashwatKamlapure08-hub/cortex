@@ -7,7 +7,25 @@ sys.path.append(".")
 
 from src.engine.script_engine import generate_script
 from rich import print as rprint
+from src.formatters.medium_formatter import (
+    format_medium,
+    production_script_to_dict as medium_to_dict
+)
 
+def test_medium_formatter():
+    print("\n" + "="*50)
+    print("TEST 5 — Medium Formatter")
+    print("="*50)
+
+    raw = generate_script(
+        topic="The future of electric vehicles",
+        format="medium",
+        tone="educational"
+    )
+
+    production = format_medium(raw)
+    result = medium_to_dict(production)
+    rprint(result)
 
 def test_short_script():
     print("\n" + "="*50)
@@ -69,3 +87,4 @@ if __name__ == "__main__":
     test_medium_script()
     test_long_script()
     test_short_formatter()  
+    test_medium_formatter()
