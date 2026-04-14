@@ -7,6 +7,26 @@ sys.path.append(".")
 
 from src.engine.script_engine import generate_script
 from rich import print as rprint
+# add import at top
+from src.utils.quality_scorer import score_script, quality_report_to_dict
+
+def test_quality_scorer():
+    print("\n" + "="*50)
+    print("TEST 7 — Quality Scorer")
+    print("="*50)
+
+    raw = generate_script(
+        topic="How to meditate for beginners",
+        format="short",
+        tone="educational"
+    )
+
+    report = score_script(raw)
+    result = quality_report_to_dict(report)
+    rprint(result)
+    print(f"\n🏆 Overall Score: {result['overall_score']}/100 — Grade: {result['grade']}")
+    print(f"✅ Passed: {result['passed']}")
+    print(f"🔄 Regenerate Recommended: {result['regenerate_recommended']}")
 from src.formatters.long_formatter import (
     format_long,
     production_script_to_dict as long_to_dict
@@ -108,3 +128,4 @@ if __name__ == "__main__":
     test_short_formatter()  
     test_medium_formatter()
     test_long_formatter()
+    test_quality_scorer()

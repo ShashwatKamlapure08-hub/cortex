@@ -53,6 +53,7 @@ class ScriptResponse(BaseModel):
     model_used: str
     formatted: bool
     script: dict
+    quality: Optional[dict] = None
     cortex_version: str = "1.0.0"
 
 

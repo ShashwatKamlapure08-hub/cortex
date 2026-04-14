@@ -3,6 +3,7 @@
 # All the endpoints Cortex exposes to the world
 
 from fastapi import APIRouter, HTTPException
+from src.utils.quality_scorer import score_script, quality_report_to_dict
 from src.api.models import ScriptRequest, ScriptResponse, ErrorResponse
 from src.engine.script_engine import generate_script
 from src.formatters.short_formatter import (
@@ -124,6 +125,9 @@ def generate(request: ScriptRequest):
             final_script = raw_script
             formatted = False
 
+        quality_report = score_script(raw_script)
+        quality_data = quality_report_to_dict(quality_report)
+       
         return ScriptResponse(
             success=True,
             topic=request.topic,
@@ -132,6 +136,7 @@ def generate(request: ScriptRequest):
             model_used=model_used,
             formatted=formatted,
             script=final_script
+            quality=quality_data
         )
 
     except HTTPException:
